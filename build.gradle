@@ -34,10 +34,10 @@ repositories {
     }
 }
 
-def jerseyVersion = "2.32"
+def jerseyVersion = "2.35"
 
 dependencies {
-    implementation 'org.codehaus.groovy:groovy-all:2.5.8'
+    implementation 'org.codehaus.groovy:groovy-all:2.5.15'
 
     implementation "org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion"
     implementation "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyVersion"
