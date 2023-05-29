@@ -5,8 +5,10 @@ import Splash from "./components/Splash.vue";
 </script>
 
 <template>
-  <menu-bar></menu-bar>
-  <splash msg="Hello World"></splash>
+    <div style="margin-top:500px">
+      <menu-bar :local=false></menu-bar>
+      <splash msg="Hello World"></splash>
+    </div>
 </template>
 
 <style scoped>
