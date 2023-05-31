@@ -25,9 +25,9 @@ jobs:
         if: "${{ github.event.inputs.SPEC_NAME != '' }}"
         with:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
-          project: ./src/app
+          working-directory: src/app
       - name: Cypress run
         uses: cypress-io/github-action@v5
         if: "${{ github.event.inputs.SPEC_NAME == '' }}"
         with:
-          project: ./src/app
+          working-directory: src/app
