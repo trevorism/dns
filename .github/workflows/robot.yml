@@ -5,7 +5,7 @@ on:
     inputs:
       SPEC_NAME:
         required: false
-        description: the specific file to run
+        description: the specific cypress test to run
         type: string
 
 permissions: write-all
@@ -20,13 +20,13 @@ jobs:
           node-version: 18
       - run: npm install
         working-directory: ./src/app
-      - name: Cypress run
+      - name: Cypress run spec ${{inputs.SPEC_NAME}}
         uses: cypress-io/github-action@v5
         if: "${{ github.event.inputs.SPEC_NAME != '' }}"
         with:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
           working-directory: src/app
-      - name: Cypress run
+      - name: Cypress run all specs
         uses: cypress-io/github-action@v5
         if: "${{ github.event.inputs.SPEC_NAME == '' }}"
         with:
