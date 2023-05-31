@@ -22,11 +22,12 @@ jobs:
         working-directory: ./src/app
       - name: Cypress run
         uses: cypress-io/github-action@v5
+        if: "${{ github.event.inputs.SPEC_NAME != '' }}"
         with:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
-        if: "${{ github.event.inputs.SPEC_NAME != '' }}"
-        working-directory: ./src/app
+          project: ./src/app
       - name: Cypress run
         uses: cypress-io/github-action@v5
         if: "${{ github.event.inputs.SPEC_NAME == '' }}"
-        working-directory: ./src/app
+        with:
+          project: ./src/app
