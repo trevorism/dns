@@ -1,0 +1,24 @@
+name: Cypress end to end application testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      SPEC_NAME:
+        required: false
+        description: the specific file to run
+        type: string
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+        working-directory: ./src/app
+      - run: cypress run --spec ".\cypress\e2e\${{ inputs.SPEC_NAME }}.cy.js"
+        working-directory: ./src/app
