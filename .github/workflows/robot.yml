@@ -7,6 +7,10 @@ on:
         required: false
         description: the specific cypress test to run
         type: string
+      CYPRESS_ENV:
+        required: false
+        description: environment variables to pass to cypress
+        type: string
 
 permissions: write-all
 
@@ -26,8 +30,10 @@ jobs:
         with:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
           working-directory: src/app
+          env: "data=${{inputs.CYPRESS_ENV}}"
       - name: Cypress run all specs
         uses: cypress-io/github-action@v5
         if: "${{ github.event.inputs.SPEC_NAME == '' }}"
         with:
           working-directory: src/app
+          env: "data=${{inputs.CYPRESS_ENV}}"
