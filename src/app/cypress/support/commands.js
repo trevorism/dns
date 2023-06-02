@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+    cy.visit('https://sso.secureserver.net/login?app=dcc&path=%2fdomains%3f')
+    cy.get('#username').type(Cypress.env('username'))
+    cy.get('#password').type(Cypress.env('password'))
+    cy.get('#submitBtn').click()
+    cy.get('.product-name').should('contain', 'Domain Manager')
+})
