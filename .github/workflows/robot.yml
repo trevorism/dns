@@ -42,7 +42,9 @@ jobs:
         if: "${{ github.event.inputs.SPEC_NAME != '' }}"
         with:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
+          node-version: 18
           working-directory: src/app
+          browser: firefox
         env:
           CYPRESS_username: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}
