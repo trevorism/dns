@@ -29,7 +29,7 @@ permissions: write-all
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -44,7 +44,6 @@ jobs:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
           node-version: 18
           working-directory: src/app
-          browser: firefox
         env:
           CYPRESS_username: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}
