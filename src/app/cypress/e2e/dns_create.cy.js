@@ -8,6 +8,7 @@ describe('creating a new DNS record', () => {
         cy.get('#nameDnsFieldInput').type(Cypress.env('host'))
         cy.get('#dataDnsFieldInput').type(Cypress.env('value'))
         cy.get('.mb-5 > .d-flex > .ux-button-primary').click()
+        cy.wait(5000)
         cy.get("#genericSuccessGrowl").should('have.text', 'Success')
     })
 })
