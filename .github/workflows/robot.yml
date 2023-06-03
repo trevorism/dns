@@ -16,7 +16,7 @@ on:
         description: Host of the DNS record
         type: string
       CYPRESS_VALUE:
-        required: true
+        required: false
         description: Value of the DNS record
         type: string
     secrets:

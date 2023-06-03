@@ -47,8 +47,7 @@ class DnsRecordController {
         GithubRequest githubRequest = new GithubRequest(workflowInputs: [
                 "SPEC_NAME"    : "dns_delete",
                 "CYPRESS_TYPE" : type,
-                "CYPRESS_HOST" : host,
-                "CYPRESS_VALUE": ""])
+                "CYPRESS_HOST" : host ])
         String requestJson = gson.toJson(githubRequest)
         secureHttpClient.post("https://github.project.trevorism.com/repo/dns/workflow", requestJson)
         return new DnsRecord(type: type, host: host)
