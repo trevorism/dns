@@ -9,6 +9,7 @@ import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
+import io.micronaut.http.annotation.Delete
 import io.micronaut.http.annotation.Post
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -36,5 +37,20 @@ class DnsRecordController {
         String requestJson = gson.toJson(githubRequest)
         secureHttpClient.post("https://github.project.trevorism.com/repo/dns/workflow", requestJson)
         return record
+    }
+
+    @Tag(name = "Dns Operations")
+    @Operation(summary = "Creates a new dns entry **Secure")
+    @Delete(value = "/{type}/{host}", produces = MediaType.APPLICATION_JSON)
+    @Secure(Roles.SYSTEM)
+    DnsRecord deleteDnsRecord(String type, String host){
+        GithubRequest githubRequest = new GithubRequest(workflowInputs: [
+                "SPEC_NAME"    : "dns_delete",
+                "CYPRESS_TYPE" : type,
+                "CYPRESS_HOST" : host,
+                "CYPRESS_VALUE": ""])
+        String requestJson = gson.toJson(githubRequest)
+        secureHttpClient.post("https://github.project.trevorism.com/repo/dns/workflow", requestJson)
+        return new DnsRecord(type: type, host: host)
     }
 }
