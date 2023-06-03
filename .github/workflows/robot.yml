@@ -40,6 +40,9 @@ jobs:
       - name: Cypress run spec ${{inputs.SPEC_NAME}}
         uses: cypress-io/github-action@v5
         if: "${{ github.event.inputs.SPEC_NAME != '' }}"
+        with:
+          spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
+          working-directory: src/app
         env:
           CYPRESS_username: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}
@@ -47,6 +50,3 @@ jobs:
           CYPRESS_host: ${{ inputs.CYPRESS_HOST }}
           CYPRESS_value: ${{ inputs.CYPRESS_VALUE }}
 
-        with:
-          spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
-          working-directory: src/app
