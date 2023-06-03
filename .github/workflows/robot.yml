@@ -1,15 +1,23 @@
-name: Cypress end to end application testing
+name: Cypress invoke DNS CRUD
 
 on:
   workflow_dispatch:
     inputs:
       SPEC_NAME:
-        required: false
+        required: true
         description: the specific cypress test to run
         type: string
-      CYPRESS_ENV:
-        required: false
-        description: environment variables to pass to cypress
+      CYPRESS_TYPE:
+        required: true
+        description: DNS record type TXT | CNAME | A | AAAA
+        type: string
+      CYPRESS_HOST:
+        required: true
+        description: Host of the DNS record
+        type: string
+      CYPRESS_VALUE:
+        required: true
+        description: Value of the DNS record
         type: string
     secrets:
       CYPRESS_USERNAME:
@@ -35,7 +43,10 @@ jobs:
         env:
           CYPRESS_username: ${{ secrets.DNS_USERNAME }}
           CYPRESS_password: ${{ secrets.DNS_PASSWORD }}
-          CYPRESS_data: ${{ fromJSON(inputs.CYPRESS_ENV) }}
+          CYPRESS_type: ${{ inputs.CYPRESS_TYPE }}
+          CYPRESS_host: ${{ inputs.CYPRESS_HOST }}
+          CYPRESS_value: ${{ inputs.CYPRESS_VALUE }}
+
         with:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
           working-directory: src/app

@@ -19,7 +19,7 @@ class DnsRecordController {
     SecureHttpClient secureHttpClient
     Gson gson = new Gson()
 
-    DnsRecordController(SecureHttpClient secureHttpClient){
+    DnsRecordController(SecureHttpClient secureHttpClient) {
         this.secureHttpClient = secureHttpClient
     }
 
@@ -28,8 +28,11 @@ class DnsRecordController {
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     @Secure(Roles.SYSTEM)
     DnsRecord createDnsRecord(@Body DnsRecord record) {
-        String json = gson.toJson(record)
-        GithubRequest githubRequest = new GithubRequest(workflowInputs: ["SPEC_NAME":"createdns", "CYPRESS_ENV":json])
+        GithubRequest githubRequest = new GithubRequest(workflowInputs: [
+                "SPEC_NAME"    : "dns_create",
+                "CYPRESS_TYPE" : record.type,
+                "CYPRESS_HOST" : record.host,
+                "CYPRESS_VALUE": record.pointsTo])
         String requestJson = gson.toJson(githubRequest)
         secureHttpClient.post("https://github.project.trevorism.com/repo/dns/workflow", requestJson)
         return record
