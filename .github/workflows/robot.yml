@@ -35,7 +35,7 @@ jobs:
         with:
           spec: cypress/e2e/${{inputs.SPEC_NAME}}.cy.js
           working-directory: src/app
-        env:
-          CYPRESS_username: ${{ secrets.DNS_USERNAME }}
-          CYPRESS_password: ${{ secrets.DNS_PASSWORD }}
-          CYPRESS_data: ${{ inputs.CYPRESS_ENV }}
+          env:
+            CYPRESS_username: ${{ secrets.DNS_USERNAME }}
+            CYPRESS_password: ${{ secrets.DNS_PASSWORD }}
+            CYPRESS_data: ${{ fromJSON(inputs.CYPRESS_ENV) }}
