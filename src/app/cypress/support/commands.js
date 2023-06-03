@@ -29,5 +29,6 @@ Cypress.Commands.add('login', () => {
     cy.get('#username').type(Cypress.env('username'))
     cy.get('#password').type(Cypress.env('password'))
     cy.get('#submitBtn').click()
-    cy.get('.product-name').should('contain', 'Domain Manager')
+    cy.wait(1000)
+    cy.get('.product-name').should('have.text', 'Domain Manager')
 })

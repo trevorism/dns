@@ -12,9 +12,9 @@ on:
         description: environment variables to pass to cypress
         type: string
     secrets:
-      DNS_USERNAME:
+      CYPRESS_USERNAME:
         required: true
-      DNS_PASSWORD:
+      CYPRESS_PASSWORD:
         required: true
 
 permissions: write-all
